@@ -3,7 +3,9 @@
 
 import { ref, computed } from "vue";
 import axios from "axios";
+import { toast } from 'vue3-toastify';
 
+import 'vue3-toastify/dist/index.css';
 
 const file = ref(null);
 
@@ -56,9 +58,11 @@ const submitFile = async () => {
 
       localStorage.setItem('image-list', JSON.stringify(lists));
 
-      // notification here
+      // notification here  
+      toast.success("Upload image berhasil!", {position: toast.POSITION.TOP_RIGHT, autoClose: 3000, closeOnClick: true, closeButton: true});
     } catch (error) {
       console.error(error);
+      toast.error("Gagal upload image!", {position: toast.POSITION.TOP_RIGHT, autoClose: 3000, closeOnClick: true, closeButton: true});
     } finally {
       const preview = document.querySelector("img");
       preview.src = null;
